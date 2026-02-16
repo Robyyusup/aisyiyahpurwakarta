@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aisyiyah Purwakarta - Perempuan Berkemajuan</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CUSTOM VARIABLES DARI PALET --- */
+        :root {
+            /* Palette Colors */
+            --aisyiyah-green: #1E704B;  /* Deep Green */
+            --aisyiyah-beige: #D0C7C4;  /* Light Grey/Beige */
+            --aisyiyah-gold: #EFCA08;   /* Yellow/Gold */
+            --aisyiyah-black: #040503;  /* Black */
+            
+            --transition-speed: 0.4s;
+        }
+
+        /* Prevent Selection to protect text copy */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--aisyiyah-black);
+            overflow-x: hidden;
+            position: relative;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+
+        /* Allow selection on input fields only */
+        input, textarea {
+            -webkit-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* --- COLORS & BUTTONS --- */
+        .text-primary { color: var(--aisyiyah-green) !important; }
+        .bg-primary { background-color: var(--aisyiyah-green) !important; }
+        .bg-beige { background-color: #f0eeed !important; } 
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--aisyiyah-green), #145235);
+            border: none;
+            box-shadow: 0 4px 15px rgba(30, 112, 75, 0.3);
+            transition: all var(--transition-speed);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 112, 75, 0.4);
+            background: linear-gradient(135deg, #145235, var(--aisyiyah-green));
+            color: var(--aisyiyah-gold);
+        }
+
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--aisyiyah-green);
+        }
+
+        .btn-outline-success {
+            color: var(--aisyiyah-green);
+            border-color: var(--aisyiyah-green);
+        }
+        .btn-outline-success:hover {
+            background-color: var(--aisyiyah-green);
+            color: white;
+        }
+
+        /* Badge Custom */
+        .badge-gold {
+            background-color: var(--aisyiyah-gold);
+            color: var(--aisyiyah-black);
+        }
+
+        /* --- NAVBAR ANIMATION --- */
+        .navbar {
+            transition: all 0.4s ease;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            color: var(--aisyiyah-black);
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--aisyiyah-green) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--aisyiyah-gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* --- HERO SLIDER BACKGROUND --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-item {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(30, 112, 75, 0.6), rgba(4, 5, 3, 0.8));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 0.8s ease-out; }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 0.8s ease-out; }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+
+        /* --- CARDS HOVER EFFECT --- */
+        .hover-card {
+            border: none;
+            border-radius: 15px;
+            background: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            border-bottom: 4px solid transparent;
+        }
+        .hover-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--aisyiyah-gold);
+        }
+        .hover-card img {
+            transition: transform 0.5s ease;
+        }
+        .hover-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- SECTION TITLE --- */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--aisyiyah-gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .section-title:hover::after { width: 100px; }
+
+        /* --- PAGE TRANSITION --- */
+        .page-section { display: none; animation: fadeInPage 0.6s ease-in-out; }
+        .page-section.active { display: block; }
+        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- BACK TO TOP BUTTON --- */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: var(--aisyiyah-gold);
+            color: var(--aisyiyah-black);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        #backToTop:hover {
+            background-color: var(--aisyiyah-green);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--aisyiyah-green);
+            color: #e2e8f0;
+            border-top: 5px solid var(--aisyiyah-gold);
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: var(--aisyiyah-gold);
+            color: var(--aisyiyah-black);
+            transform: rotate(360deg);
+        }
+
+        /* Admin Dashboard */
+        .admin-panel { border-left: 5px solid var(--aisyiyah-green); }
+
+        /* Logo Styling */
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        .navbar-brand:hover img { transform: scale(1.05); }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .navbar { background: white !important; padding: 10px 0; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-3" href="#" onclick="navTo('home')">
+                <img src="logo.jpg" alt="Logo Aisyiyah" class="shadow-sm rounded-circle">
+                <div class="lh-1">
+                    <span class="fw-bold" style="color: var(--aisyiyah-green); font-size: 1.2rem;">AISYIYAH</span><br>
+                    <small style="color: var(--aisyiyah-black); font-size: 0.8rem; letter-spacing: 1px;">PURWAKARTA</small>
+                </div>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-3 bg-white bg-lg-transparent p-3 p-lg-0 rounded shadow-lg shadow-lg-none mt-3 mt-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="navTo('home')">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="navTo('about')">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="navTo('program')">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="navTo('services')">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="navTo('news')">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="navTo('contact')">Kontak</a></li>
+                    <li class="nav-item">
+                        <button onclick="openLoginModal()" id="loginLink" class="btn btn-primary rounded-pill px-4 btn-sm fw-bold">Login Admin</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button onclick="topFunction()" id="backToTop" title="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- === 1. HALAMAN BERANDA === -->
+    <div id="home" class="page-section active">
+        <!-- HERO SECTION WITH SLIDER -->
+        <header class="hero">
+            <div class="hero-overlay"></div>
+            <!-- Carousel Background -->
+            <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="background-image: url('5e72f6adbf417-commitment2-desktop.jpg');"></div>
+                    <div class="carousel-item" style="background-image: url('5e72f72cca561-respect-desktop2.jpg');"></div>
+                    <div class="carousel-item" style="background-image: url('5e72f74b99ff0-humility-desktop2.jpg');"></div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="container hero-content">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 reveal active">
+                        <span class="badge badge-gold mb-3 px-3 py-2 rounded-pill fw-bold shadow-sm">Perempuan Berkemajuan</span>
+                        <h1 class="mb-4 display-3 fw-bold">Pimpinan Daerah<br>Aisyiyah Purwakarta</h1>
+                        <p class="lead mb-5 opacity-90 fs-4">"Membina, Memberdayakan, dan Mencerahkan<br>Perempuan & Masyarakat"</p>
+                        <div class="d-flex gap-3 justify-content-center">
+                            <button class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg" onclick="navTo('program')">
+                                Program <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold" onclick="navTo('about')">
+                                Tentang Kami
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="py-5">
+            <div class="container py-5 text-center">
+                <div class="section-title reveal">
+                    <h2 class="text-primary fw-bold">Tentang Aisyiyah</h2>
+                </div>
+                <div class="row justify-content-center mb-5 reveal">
+                    <div class="col-md-8">
+                        <p class="text-secondary fs-5 lh-lg">
+                            Aisyiyah Purwakarta adalah gerakan perempuan inspiratif yang membina dan memberdayakan perempuan serta masyarakat Purwakarta. Kami menghadirkan program sosial, pendidikan, kesehatan, dan ekonomi untuk kesejahteraan umat.
+                        </p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4 reveal-left">
+                        <div class="card p-5 h-100 align-items-center text-center hover-card shadow-sm">
+                            <div class="mb-4 p-3 rounded-circle bg-beige text-primary">
+                                <i class="fas fa-book-open fa-3x"></i>
+                            </div>
+                            <h4 class="fw-bold">Pendidikan</h4>
+                            <p class="text-muted">Mencerdaskan kehidupan bangsa melalui pendidikan karakter anak usia dini.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal">
+                        <div class="card p-5 h-100 align-items-center text-center hover-card shadow-sm">
+                            <div class="mb-4 p-3 rounded-circle bg-beige text-danger">
+                                <i class="fas fa-hand-holding-heart fa-3x"></i>
+                            </div>
+                            <h4 class="fw-bold">Sosial</h4>
+                            <p class="text-muted">Kepedulian nyata melalui bakti sosial, santunan, dan tanggap bencana.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal-right">
+                        <div class="card p-5 h-100 align-items-center text-center hover-card shadow-sm">
+                            <div class="mb-4 p-3 rounded-circle bg-beige text-success">
+                                <i class="fas fa-chart-line fa-3x"></i>
+                            </div>
+                            <h4 class="fw-bold">Ekonomi</h4>
+                            <p class="text-muted">Membangun kemandirian ekonomi perempuan melalui UMKM dan pelatihan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preview Berita -->
+        <section class="py-5 bg-beige position-relative">
+            <div class="container py-5">
+                <div class="text-center mb-5 reveal">
+                    <h6 class="text-success fw-bold text-uppercase ls-1">Kabar Terbaru</h6>
+                    <h2 class="fw-bold text-dark display-6">Berita & Kegiatan</h2>
+                    <div style="width: 50px; height: 4px; background: var(--aisyiyah-gold); margin: 15px auto; border-radius: 2px;"></div>
+                </div>
+                <div class="row g-4" id="homeNewsGrid">
+                    <!-- Berita dimuat via JS -->
+                </div>
+                <div class="text-center mt-5 reveal">
+                    <button class="btn btn-outline-success rounded-pill px-5 py-2 fw-bold border-2" onclick="navTo('news')">
+                        Lihat Semua Berita <i class="fas fa-long-arrow-alt-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- === 2. HALAMAN TENTANG === -->
+    <div id="about" class="page-section">
+        <div class="hero" style="min-height: 50vh;">
+            <div class="hero-overlay"></div>
+            <div class="hero-carousel" style="background: url('5e72f74b99ff0-humility-desktop2.jpg') center/cover;"></div>
+            <div class="container hero-content reveal">
+                <h1 class="display-4 fw-bold">Tentang Kami</h1>
+                <p class="lead">Gerakan Perempuan Inspiratif, Membina & Memberdayakan</p>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6 reveal-left">
+                    <h6 class="text-success fw-bold text-uppercase">Profil Organisasi</h6>
+                    <h2 class="text-dark fw-bold mb-4 display-6">Sejarah & Visi</h2>
+                    <p class="text-secondary mb-4 lh-lg">Aisyiyah Purwakarta merupakan bagian dari gerakan Aisyiyah tingkat nasional. Di Purwakarta, kami hadir untuk memberdayakan perempuan, anak, dan masyarakat melalui program-program yang konkret dan berkelanjutan.</p>
+                    <div class="p-4 bg-beige rounded border-start border-success border-4 shadow-sm">
+                        <h5 class="fw-bold mb-2 text-success">Visi Kami</h5>
+                        <p class="fst-italic text-dark mb-0">"Menjadi gerakan perempuan inspiratif yang membina, memberdayakan, dan mencerahkan masyarakat Purwakarta."</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal-right">
+                    <img src="5e72f6adbf417-commitment2-desktop.jpg" class="img-fluid rounded-4 shadow-lg" alt="Tentang Aisyiyah">
+                </div>
+            </div>
+
+            <div class="mt-5 pt-5 reveal">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-primary">Struktur Pengurus</h2>
+                    <div style="width: 60px; height: 3px; background: var(--aisyiyah-gold); margin: 10px auto;"></div>
+                </div>
+                <div class="card shadow border-0 rounded-4 overflow-hidden">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th class="p-4 border-0">Jabatan</th>
+                                        <th class="p-4 border-0">Nama Lengkap</th>
+                                        <th class="p-4 border-0 text-center">Foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="publicPengurusBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === 3. HALAMAN PROGRAM === -->
+    <div id="program" class="page-section">
+        <div class="hero" style="min-height: 50vh;">
+            <div class="hero-overlay"></div>
+            <div class="hero-carousel" style="background: url('5e72f72cca561-respect-desktop2.jpg') center/cover;"></div>
+            <div class="container hero-content reveal">
+                <h1 class="display-4 fw-bold">Program Unggulan</h1>
+                <p class="lead">Bersama Mewujudkan Perempuan Mandiri</p>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-6 reveal-left">
+                    <div class="card h-100 hover-card shadow-sm border-0">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Pendidikan" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute top-0 start-0 m-3 bg-white px-3 py-1 rounded-pill fw-bold text-success shadow-sm">Pendidikan</div>
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h3 class="card-title fw-bold text-dark">Pendidikan & Literasi</h3>
+                            <p class="card-text text-secondary mb-4">Program RA, TK Aisyiyah, dan PKBM untuk mencerdaskan generasi penerus.</p>
+                            <button class="btn btn-primary w-100 rounded-pill mt-auto py-2" onclick="openRegistrationModal('Program Pendidikan')">
+                                Daftar Program <i class="fas fa-chevron-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal-right">
+                    <div class="card h-100 hover-card shadow-sm border-0">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Kesehatan" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute top-0 start-0 m-3 bg-white px-3 py-1 rounded-pill fw-bold text-danger shadow-sm">Kesehatan</div>
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h3 class="card-title fw-bold text-dark">Kesehatan & Kesejahteraan</h3>
+                            <p class="card-text text-secondary mb-4">Layanan Klinik Aisyiyah dan edukasi gizi untuk keluarga sehat.</p>
+                            <button class="btn btn-primary w-100 rounded-pill mt-auto py-2" onclick="openRegistrationModal('Program Kesehatan')">
+                                Lihat Layanan <i class="fas fa-chevron-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === 4. HALAMAN LAYANAN === -->
+    <div id="services" class="page-section">
+        <div class="container py-5 mt-5">
+            <div class="text-center mb-5 reveal">
+                <h6 class="text-success fw-bold text-uppercase">Fasilitas & Akses</h6>
+                <h2 class="text-dark fw-bold display-6">Layanan Aisyiyah</h2>
+                <div style="width: 50px; height: 3px; background: var(--aisyiyah-gold); margin: 10px auto;"></div>
+            </div>
+            <div class="row g-4">
+                <!-- Layanan Cards -->
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-school fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Pendaftaran TK/RA</h4>
+                            <p class="text-muted flex-grow-1">Pendaftaran siswa baru TK Aisyiyah.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('Pendaftaran TK/RA')">Daftar Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-user-md fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Klinik Pratama</h4>
+                            <p class="text-muted flex-grow-1">Pemeriksaan umum dan KIA.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('Klinik Pratama')">Daftar Periksa</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-id-card fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Pembuatan KTA</h4>
+                            <p class="text-muted flex-grow-1">Administrasi keanggotaan Aisyiyah.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('Pembuatan KTA')">Ajukan KTA</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-store fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Konsultasi UMKM</h4>
+                            <p class="text-muted flex-grow-1">Bimbingan manajemen usaha.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('Konsultasi UMKM')">Daftar Konsultasi</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-book-reader fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">PKBM Nonformal</h4>
+                            <p class="text-muted flex-grow-1">Kejar Paket A, B, C.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('PKBM Nonformal')">Daftar Belajar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal">
+                    <div class="card h-100 text-center p-4 hover-card border-0 shadow-sm">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="mb-4 p-3 bg-beige rounded-circle text-primary shadow-sm" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                                <i class="fas fa-hands-helping fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Layanan Sosial</h4>
+                            <p class="text-muted flex-grow-1">Bantuan tanggap bencana.</p>
+                            <button class="btn btn-outline-success rounded-pill w-100 mt-3 fw-bold" onclick="openRegistrationModal('Layanan Sosial')">Ajukan Bantuan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === 5. HALAMAN BERITA & ADMIN === -->
+    <div id="news" class="page-section">
+        <div class="container py-5 mt-5">
+            
+            <!-- ADMIN DASHBOARD (Tersembunyi by default) -->
+            <div id="adminDashboard" class="card shadow-lg p-4 mb-5 d-none border-0 rounded-4 admin-panel">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h3 class="text-primary m-0 fw-bold"><i class="fas fa-user-shield me-2"></i>Dashboard Admin</h3>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-success btn-sm rounded-pill" onclick="showAdminTab('newsTab')">Berita</button>
+                        <button class="btn btn-outline-success btn-sm rounded-pill" onclick="showAdminTab('pengurusTab')">Pengurus</button>
+                        <button class="btn btn-outline-success btn-sm rounded-pill" onclick="showAdminTab('pendaftarTab')">Pendaftar</button>
+                        <button class="btn btn-danger btn-sm rounded-pill" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+
+                <!-- Tab Kelola Berita -->
+                <div id="newsTab">
+                    <h5 class="mb-3 fw-bold">Tambah Berita Baru</h5>
+                    <form onsubmit="handleNewsSubmit(event)" class="mb-4 p-4 bg-beige rounded-4 shadow-sm">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Judul Berita</label>
+                                <input type="text" id="newsTitle" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Tanggal</label>
+                                <input type="date" id="newsDate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Kategori</label>
+                            <select id="newsCategory" class="form-select">
+                                <option>Pendidikan</option>
+                                <option>Kesehatan</option>
+                                <option>Ekonomi</option>
+                                <option>Sosial</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Isi Berita Lengkap</label>
+                            <textarea id="newsContent" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-paper-plane me-1"></i> Publish Berita</button>
+                    </form>
+
+                    <h5 class="mb-3 border-top pt-3 fw-bold">Daftar Berita (Hapus)</h5>
+                    <div id="adminNewsList" class="list-group list-group-flush shadow-sm rounded-3 overflow-hidden" style="max-height: 300px; overflow-y: auto;"></div>
+                </div>
+
+                <!-- Tab Kelola Pengurus -->
+                <div id="pengurusTab" class="d-none">
+                    <h5 class="mb-3 fw-bold">Tambah Pengurus</h5>
+                    <form onsubmit="handlePengurusSubmit(event)" class="mb-4 p-4 bg-beige rounded-4 shadow-sm">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Jabatan</label>
+                                <input type="text" id="pJabatan" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nama Lengkap</label>
+                                <input type="text" id="pNama" class="form-control" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Simpan Pengurus</button>
+                    </form>
+                    <div class="table-responsive rounded-3 shadow-sm">
+                        <table class="table table-bordered mb-0">
+                            <thead class="bg-light"><tr><th>Jabatan</th><th>Nama</th><th>Aksi</th></tr></thead>
+                            <tbody id="adminPengurusBody" class="bg-white"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab Data Pendaftar -->
+                <div id="pendaftarTab" class="d-none">
+                    <h5 class="mb-3 fw-bold">Data Pendaftaran Masuk</h5>
+                    <div class="table-responsive rounded-3 shadow-sm">
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-warning text-dark">
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Layanan</th>
+                                    <th>Nama</th>
+                                    <th>Kontak</th>
+                                    <th>Pesan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPendaftarBody" class="bg-white"></tbody>
+                        </table>
+                        <div id="emptyPendaftarMsg" class="text-center text-muted py-3 bg-white d-none">
+                            Belum ada pendaftar masuk.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUBLIC NEWS LIST -->
+            <div class="text-center mb-5 reveal">
+                <h6 class="text-success fw-bold text-uppercase">Arsip Informasi</h6>
+                <h2 class="text-primary fw-bold">Berita & Kegiatan</h2>
+                <div style="width: 50px; height: 3px; background: var(--aisyiyah-gold); margin: 10px auto;"></div>
+            </div>
+            
+            <div class="row g-4" id="publicNewsGrid"></div>
+        </div>
+    </div>
+
+    <!-- === 6. HALAMAN KONTAK === -->
+    <div id="contact" class="page-section">
+        <div class="hero" style="min-height: 40vh;">
+            <div class="hero-overlay"></div>
+            <div class="hero-carousel" style="background: url('5e72f72cca561-respect-desktop2.jpg') center/cover;"></div>
+            <div class="container hero-content">
+                <h1 class="fw-bold">Hubungi Kami</h1>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6 reveal-left">
+                    <div class="card h-100 shadow border-0 rounded-4">
+                        <div class="card-body p-5">
+                            <h3 class="mb-4 text-primary fw-bold"><i class="fas fa-paper-plane me-2"></i>Kirim Pesan</h3>
+                            <form onsubmit="handleContactSubmit(event)">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Nama Lengkap</label>
+                                    <input type="text" id="contactName" class="form-control bg-beige border-0 py-3" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Email / WhatsApp</label>
+                                    <input type="text" id="contactInfo" class="form-control bg-beige border-0 py-3" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Pesan</label>
+                                    <textarea id="contactMessage" class="form-control bg-beige border-0 py-3" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm">Kirim Pesan (WhatsApp)</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal-right">
+                    <h3 class="mb-4 text-primary fw-bold">Informasi Kontak</h3>
+                    
+                    <div class="card border-0 bg-beige mb-4 rounded-4 shadow-sm">
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-0 d-flex flex-column gap-4">
+                                <li class="d-flex align-items-center">
+                                    <div class="bg-white p-3 rounded-circle shadow-sm me-3 text-warning"><i class="fas fa-map-marker-alt fa-lg"></i></div>
+                                    <div>
+                                        <small class="text-muted d-block">Alamat</small>
+                                        <span class="fw-bold text-dark">Jl. Veteran No. XX, Purwakarta</span>
+                                    </div>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <div class="bg-white p-3 rounded-circle shadow-sm me-3 text-warning"><i class="fas fa-phone fa-lg"></i></div>
+                                    <div>
+                                        <small class="text-muted d-block">Telepon</small>
+                                        <span class="fw-bold text-dark">(0264) XXX-XXXX</span>
+                                    </div>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <div class="bg-white p-3 rounded-circle shadow-sm me-3 text-warning"><i class="fas fa-envelope fa-lg"></i></div>
+                                    <div>
+                                        <small class="text-muted d-block">Email</small>
+                                        <span class="fw-bold text-dark">info@aisyiyahpurwakarta.or.id</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MAPS CONTAINER -->
+                    <div class="card border-0 rounded-4 shadow-sm overflow-hidden">
+                        <div class="map-container">
+                             <!-- Embed Google Maps Purwakarta Area -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7051466639556!2d107.4334413153545!3d-6.558838665934529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e690e60451a7e2b%3A0x629555c82d56a783!2sPurwakarta%2C%20Purwakarta%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1677651234567!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="card-footer bg-white border-0 text-center py-3">
+                            <a href="https://goo.gl/maps/placeholder" target="_blank" class="text-decoration-none fw-bold text-success">
+                                <i class="fas fa-external-link-alt me-2"></i>Buka di Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                         <!-- GANTI LOGO FOOTER -->
+                        <img src="logo.jpg" alt="Logo" class="rounded-circle shadow-sm bg-white p-1" style="width: 50px; height: 50px;">
+                        <h4 class="fw-bold text-white m-0">Aisyiyah Purwakarta</h4>
+                    </div>
+                    <p class="text-white-50 lh-lg">Gerakan perempuan berkemajuan untuk mencerahkan peradaban bangsa. Berfokus pada pemberdayaan perempuan, pendidikan anak, dan kesejahteraan sosial.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4 text-white">Tautan Cepat</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="#" onclick="navTo('program')" class="text-white-50 text-decoration-none hover-text-white">Program Kami</a></li>
+                        <li><a href="#" onclick="navTo('services')" class="text-white-50 text-decoration-none hover-text-white">Layanan Publik</a></li>
+                        <li><a href="#" onclick="navTo('news')" class="text-white-50 text-decoration-none hover-text-white">Berita Terbaru</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4 text-white">Ikuti Kami</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-4 border-top border-secondary border-opacity-25" style="background-color: var(--aisyiyah-black);">
+            <small class="text-white-50">&copy; 2026 Pimpinan Daerah Aisyiyah Purwakarta. All Rights Reserved.</small>
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-primary text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold">Login Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <form onsubmit="performLogin(event)">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-secondary">Password</label>
+                            <input type="password" id="adminPassword" class="form-control bg-beige border-0 py-3" placeholder="Masukkan password (admin123)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold">Masuk Dashboard</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETAIL BERITA (POPUP BACA BERITA) -->
+    <div class="modal fade" id="newsDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-2">
+                    <img id="detailImg" src="" class="img-fluid rounded-4 w-100 mb-4 shadow-sm" style="max-height: 350px; object-fit: cover;">
+                    <span id="detailDate" class="badge badge-gold text-dark mb-3 px-3 py-2 rounded-pill"></span>
+                    <h2 id="detailTitle" class="fw-bold text-dark mb-4 display-6"></h2>
+                    <p id="detailContent" class="text-secondary fs-5" style="line-height: 1.8; white-space: pre-wrap;"></p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PENDAFTARAN LAYANAN -->
+    <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <div class="modal-header bg-warning text-dark border-0 py-3">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-file-alt me-2"></i>Formulir Pendaftaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form onsubmit="handleRegistrationSubmit(event)">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Jenis Layanan</label>
+                            <input type="text" id="regServiceType" class="form-control bg-beige fw-bold text-primary border-0" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Nama Lengkap</label>
+                            <input type="text" id="regName" class="form-control bg-beige border-0" required placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Nomor WhatsApp / HP</label>
+                            <input type="number" id="regPhone" class="form-control bg-beige border-0" required placeholder="08xxxxxxxxxx">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label text-muted">Pesan / Keterangan Tambahan</label>
+                            <textarea id="regMessage" class="form-control bg-beige border-0" rows="3" placeholder="Contoh: Saya ingin mendaftar untuk anak usia 5 tahun..."></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success rounded-pill py-3 fw-bold shadow-sm">Kirim Pendaftaran (WhatsApp)</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* --- 1. DATA & INITIALIZATION --- */
+        const defaultNews = [
+            { id: 1, title: "Bakti Sosial Ramadhan 2026", date: "2026-02-12", category: "Sosial", content: "Aisyiyah Purwakarta mengadakan bakti sosial pembagian sembako kepada 100 kaum dhuafa di Desa Cijantung. Kegiatan ini juga diisi dengan pemeriksaan kesehatan gratis untuk lansia.", img: "https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" },
+            { id: 2, title: "Pelatihan Wirausaha Desa", date: "2026-02-05", category: "Ekonomi", content: "Program pemberdayaan ekonomi perempuan melalui pelatihan pembuatan kerajinan tangan dari eceng gondok. Dihadiri oleh 50 peserta dari berbagai kecamatan.", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" },
+            { id: 3, title: "Seminar Gizi Anak", date: "2026-01-28", category: "Kesehatan", content: "Seminar pentingnya gizi seimbang untuk mencegah stunting pada anak. Narasumber dari Dinas Kesehatan Purwakarta memberikan materi yang sangat bermanfaat bagi ibu-ibu muda.", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" }
+        ];
+
+        const defaultPengurus = [
+            { id: 1, jabatan: "Ketua Pimpinan Daerah", nama: "Hj. Siti Aminah" },
+            { id: 2, jabatan: "Wakil Ketua", nama: "Ibu Rina Wati" },
+            { id: 3, jabatan: "Sekretaris", nama: "Ibu Nurhayati" },
+            { id: 4, jabatan: "Bendahara", nama: "Ibu Sri Wahyuni" }
+        ];
+
+        if (!localStorage.getItem('newsData')) localStorage.setItem('newsData', JSON.stringify(defaultNews));
+        if (!localStorage.getItem('pengurusData')) localStorage.setItem('pengurusData', JSON.stringify(defaultPengurus));
+        if (!localStorage.getItem('registrationData')) localStorage.setItem('registrationData', JSON.stringify([]));
+
+        /* --- 2. SCROLL ANIMATION & NAVBAR LOGIC --- */
+        const backToTopBtn = document.getElementById("backToTop");
+        
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            const scrollPos = window.scrollY;
+
+            // Navbar Transparency
+            if (scrollPos > 50) {
+                navbar.classList.add('scrolled');
+                navbar.classList.add('shadow-sm');
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.remove('shadow-sm');
+            }
+
+            // Back To Top Button visibility
+            if (scrollPos > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+
+            // Reveal Elements on Scroll
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+
+            // Scroll Spy (Simple Update Active Link)
+            updateActiveLink();
+        });
+
+        // Trigger reveal on load
+        window.dispatchEvent(new Event('scroll'));
+
+        // Scroll Spy Function
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('.page-section.active'); 
+            // Since this is SPA, only one section is active at DOM, but logic is different.
+            // Actually, we switch display block/none, so scroll spy is less relevant for SPA
+            // BUT, if user scrolls long pages (Home), we might want to highlight sub-sections?
+            // Current code switches entire page views.
+            // Let's keep logic simple: Navbar highlights based on 'navTo' variable state mostly.
+        }
+
+        // Back to top function
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+
+        /* --- 3. NAVIGATION & UI --- */
+        function navTo(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            // Navbar Active State
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(a => {
+                a.classList.remove('active');
+                if(a.getAttribute('onclick').includes(pageId)) a.classList.add('active');
+            });
+            
+            // Scroll top
+            window.scrollTo(0,0);
+            setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
+
+            // Close Mobile Menu
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                new bootstrap.Collapse(navbarCollapse).hide();
+            }
+        }
+
+        /* --- 4. LOGIN ADMIN --- */
+        let loginModal;
+
+        function openLoginModal() {
+            const isLogin = sessionStorage.getItem('isAdmin');
+            if (isLogin) {
+                navTo('news'); 
+            } else {
+                loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }
+        }
+
+        function performLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === "admin123") {
+                sessionStorage.setItem('isAdmin', 'true');
+                alert("Login Berhasil!");
+                loginModal.hide();
+                document.getElementById('adminPassword').value = ''; 
+                updateAdminUI();
+                navTo('news');
+            } else {
+                alert("Password Salah!");
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isAdmin');
+            alert("Logout Berhasil");
+            updateAdminUI();
+            navTo('home');
+        }
+
+        function updateAdminUI() {
+            const isLogin = sessionStorage.getItem('isAdmin');
+            const dashboard = document.getElementById('adminDashboard');
+            const loginLink = document.getElementById('loginLink');
+            
+            if (isLogin) {
+                dashboard.classList.remove('d-none');
+                loginLink.textContent = "Dashboard Admin";
+                loginLink.classList.remove('btn-primary');
+                loginLink.classList.add('btn-warning');
+                renderRegistrations();
+            } else {
+                dashboard.classList.add('d-none');
+                loginLink.textContent = "Login Admin";
+                loginLink.classList.add('btn-primary');
+                loginLink.classList.remove('btn-warning');
+            }
+        }
+
+        /* --- 5. RENDER CONTENT --- */
+        function renderNews() {
+            const news = JSON.parse(localStorage.getItem('newsData')) || [];
+            const container = document.getElementById('publicNewsGrid');
+            const homeContainer = document.getElementById('homeNewsGrid');
+            const adminList = document.getElementById('adminNewsList');
+
+            if(container) container.innerHTML = '';
+            if(homeContainer) homeContainer.innerHTML = '';
+            if(adminList) adminList.innerHTML = '';
+
+            news.forEach((item, index) => {
+                // Public Card HTML
+                const html = `
+                    <div class="col-md-4 reveal">
+                        <div class="card h-100 border-0 shadow-sm hover-card rounded-4">
+                            <div class="overflow-hidden rounded-top-4 position-relative">
+                                <img src="${item.img}" class="card-img-top" alt="${item.title}">
+                                <div class="position-absolute top-0 end-0 m-3 badge badge-gold text-dark shadow-sm">${item.category}</div>
+                            </div>
+                            <div class="card-body d-flex flex-column p-4">
+                                <small class="text-muted mb-2"><i class="far fa-calendar-alt me-2"></i> ${item.date}</small>
+                                <h5 class="card-title fw-bold text-dark mb-3">${item.title}</h5>
+                                <p class="card-text text-secondary flex-grow-1">${item.content.substring(0, 80)}...</p>
+                                <button class="btn btn-outline-success btn-sm mt-3 w-100 rounded-pill fw-bold" onclick="showNewsDetail(${item.id})">Baca Selengkapnya</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                if (container) container.innerHTML += html;
+                if (homeContainer && index < 3) homeContainer.innerHTML += html;
+
+                if (adminList) {
+                    adminList.innerHTML += `
+                        <div class="list-group-item d-flex justify-content-between align-items-center bg-white my-1 border rounded shadow-sm">
+                            <div>
+                                <h6 class="mb-0 fw-bold">${item.title}</h6>
+                                <small class="text-muted">${item.date}</small>
+                            </div>
+                            <button class="btn btn-danger btn-sm rounded-circle" onclick="deleteNews(${item.id})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function showNewsDetail(id) {
+            const news = JSON.parse(localStorage.getItem('newsData'));
+            const item = news.find(n => n.id === id);
+            
+            if (item) {
+                document.getElementById('detailTitle').textContent = item.title;
+                document.getElementById('detailDate').textContent = `${item.category} • ${item.date}`;
+                document.getElementById('detailContent').textContent = item.content;
+                document.getElementById('detailImg').src = item.img;
+                
+                new bootstrap.Modal(document.getElementById('newsDetailModal')).show();
+            }
+        }
+
+        /* --- 6. REGISTRATION LOGIC --- */
+        function openRegistrationModal(serviceName) {
+            document.getElementById('regServiceType').value = serviceName;
+            document.getElementById('regName').value = '';
+            document.getElementById('regPhone').value = '';
+            document.getElementById('regMessage').value = '';
+            new bootstrap.Modal(document.getElementById('registrationModal')).show();
+        }
+
+        // WhatsApp Helper Function
+        function sendToWhatsapp(phone, text) {
+             // Ubah 08xxx jadi 628xxx (Example logic)
+             // Default nomor admin
+             const adminPhone = "6289612622772"; 
+             const url = `https://wa.me/${adminPhone}?text=${encodeURIComponent(text)}`;
+             window.open(url, '_blank');
+        }
+
+        function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            const service = document.getElementById('regServiceType').value;
+            const name = document.getElementById('regName').value;
+            const phone = document.getElementById('regPhone').value;
+            const message = document.getElementById('regMessage').value;
+            const date = new Date().toLocaleDateString('id-ID');
+
+            // Save to LocalStorage for Admin Dashboard
+            const newReg = { id: Date.now(), date, service, name, phone, message };
+            const list = JSON.parse(localStorage.getItem('registrationData')) || [];
+            list.unshift(newReg);
+            localStorage.setItem('registrationData', JSON.stringify(list));
+
+            // Create WhatsApp Message
+            const waText = `Halo Admin Aisyiyah, saya ingin mendaftar layanan:\n\n*Jenis Layanan:* ${service}\n*Nama:* ${name}\n*No HP:* ${phone}\n*Pesan:* ${message}\n\nMohon informasinya. Terima kasih.`;
+            
+            sendToWhatsapp(phone, waText);
+
+            alert("Data tersimpan! Anda akan dialihkan ke WhatsApp Admin.");
+            bootstrap.Modal.getInstance(document.getElementById('registrationModal')).hide();
+            if(sessionStorage.getItem('isAdmin')) renderRegistrations();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const info = document.getElementById('contactInfo').value;
+            const msg = document.getElementById('contactMessage').value;
+
+            const waText = `Halo Admin Aisyiyah, saya ingin bertanya:\n\n*Nama:* ${name}\n*Kontak:* ${info}\n*Pesan:* ${msg}`;
+            sendToWhatsapp(null, waText);
+        }
+
+        function renderRegistrations() {
+            const data = JSON.parse(localStorage.getItem('registrationData')) || [];
+            const tbody = document.getElementById('adminPendaftarBody');
+            const emptyMsg = document.getElementById('emptyPendaftarMsg');
+
+            if (tbody) {
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    emptyMsg.classList.remove('d-none');
+                } else {
+                    emptyMsg.classList.add('d-none');
+                    data.forEach(reg => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${reg.date}</td>
+                                <td><span class="badge bg-info text-dark">${reg.service}</span></td>
+                                <td class="fw-bold">${reg.name}</td>
+                                <td>${reg.phone}</td>
+                                <td><small>${reg.message}</small></td>
+                                <td><button class="btn btn-danger btn-sm rounded-pill" onclick="deleteRegistration(${reg.id})">Hapus</button></td>
+                            </tr>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function deleteRegistration(id) {
+            if(confirm('Hapus data pendaftar ini?')) {
+                let list = JSON.parse(localStorage.getItem('registrationData'));
+                list = list.filter(item => item.id !== id);
+                localStorage.setItem('registrationData', JSON.stringify(list));
+                renderRegistrations();
+            }
+        }
+
+        /* --- 7. ADMIN CRUD --- */
+        function showAdminTab(tabName) {
+            ['newsTab', 'pengurusTab', 'pendaftarTab'].forEach(t => document.getElementById(t).classList.add('d-none'));
+            document.getElementById(tabName).classList.remove('d-none');
+        }
+
+        function handleNewsSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('newsTitle').value;
+            const date = document.getElementById('newsDate').value;
+            const category = document.getElementById('newsCategory').value;
+            const content = document.getElementById('newsContent').value;
+            const newData = {
+                id: Date.now(), title, date, category, content,
+                img: "https://placehold.co/600x400/065f46/ffffff?text=" + encodeURIComponent(category)
+            };
+            const list = JSON.parse(localStorage.getItem('newsData'));
+            list.unshift(newData);
+            localStorage.setItem('newsData', JSON.stringify(list));
+            alert("Berita Berhasil Ditambahkan!");
+            e.target.reset();
+            renderNews();
+        }
+
+        function deleteNews(id) {
+            if(confirm('Hapus berita ini?')) {
+                let list = JSON.parse(localStorage.getItem('newsData'));
+                list = list.filter(item => item.id !== id);
+                localStorage.setItem('newsData', JSON.stringify(list));
+                renderNews();
+            }
+        }
+
+        function handlePengurusSubmit(e) {
+            e.preventDefault();
+            const jabatan = document.getElementById('pJabatan').value;
+            const nama = document.getElementById('pNama').value;
+            const list = JSON.parse(localStorage.getItem('pengurusData'));
+            list.push({ id: Date.now(), jabatan, nama });
+            localStorage.setItem('pengurusData', JSON.stringify(list));
+            alert("Pengurus tersimpan!");
+            e.target.reset();
+            renderPengurus();
+        }
+
+        function deletePengurus(id) {
+            if(confirm('Hapus pengurus ini?')) {
+                let list = JSON.parse(localStorage.getItem('pengurusData'));
+                list = list.filter(item => item.id !== id);
+                localStorage.setItem('pengurusData', JSON.stringify(list));
+                renderPengurus();
+            }
+        }
+
+        function renderPengurus() {
+            const data = JSON.parse(localStorage.getItem('pengurusData'));
+            const publicBody = document.getElementById('publicPengurusBody');
+            const adminBody = document.getElementById('adminPengurusBody');
+            
+            if(publicBody) publicBody.innerHTML = '';
+            if(adminBody) adminBody.innerHTML = '';
+
+            data.forEach(p => {
+                if(publicBody) {
+                    publicBody.innerHTML += `<tr><td class="fw-bold text-primary">${p.jabatan}</td><td class="fw-bold">${p.nama}</td><td class="text-center"><i class="fas fa-user-circle fa-2x text-secondary"></i></td></tr>`;
+                }
+                if(adminBody) {
+                    adminBody.innerHTML += `<tr><td>${p.jabatan}</td><td>${p.nama}</td><td><button class="btn btn-danger btn-sm rounded-pill" onclick="deletePengurus(${p.id})">Hapus</button></td></tr>`;
+                }
+            });
+        }
+
+        /* --- INIT --- */
+        window.onload = function() {
+            renderNews();
+            renderPengurus();
+            updateAdminUI();
+            window.dispatchEvent(new Event('scroll'));
+        };
+        
+        // Anti-Inspect Script
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        document.onkeydown = function(e) {
+            // F12
+            if(e.keyCode == 123) {
+                return false;
+            }
+            // Ctrl+Shift+I (Inspect)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+Shift+J (Console)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+U (View Source)
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+S (Save)
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { // Add save blocking as well
+                e.preventDefault(); // Standard prevent default
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>
